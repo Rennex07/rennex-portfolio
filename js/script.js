@@ -78,7 +78,7 @@ interactiveElements.forEach(selector => {
     });
 });
 
-const words = ['Web Developer', 'UI/UX Designer', 'Freelancer'];
+const words = ['System Administrator', 'Polyglot Developer'];
 let wordIndex = 0;
 let charIndex = 0;
 let isDeleting = false;
@@ -91,10 +91,9 @@ function type() {
     const currentWord = words[wordIndex];
     
     if (isDeleting) {
-        // Delete characters
         typingText.textContent = currentWord.substring(0, charIndex - 1);
         charIndex--;
-        typeSpeed = 50; // Faster when deleting
+        typeSpeed = 50;
     } else {
         typingText.textContent = currentWord.substring(0, charIndex + 1);
         charIndex++;
