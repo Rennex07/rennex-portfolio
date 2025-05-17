@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About | Rennex</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .about-hero {
+            padding: 15rem 0 8rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.9), rgba(0, 20, 15, 0.9)), 
+                        url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') no-repeat center center/cover;
+            color: white;
+        }
+
+        .about-hero h1 {
+            font-size: 4.8rem;
+            margin-bottom: 2rem;
+            background: linear-gradient(45deg, #fff, var(--primary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+        }
+
+        .about-content {
+            padding: 8rem 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .about-section {
+            margin-bottom: 6rem;
+        }
+
+        .about-section h2 {
+            font-size: 3.2rem;
+            margin-bottom: 2rem;
+            color: var(--heading-color);
+        }
+
+        .about-section p {
+            font-size: 1.8rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+            color: var(--text-color);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+
+
+        @media (max-width: 768px) {
+            .about-hero h1 {
+                font-size: 3.6rem;
+            }
+            
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+    
+    <header>
+        <nav>
+            <div class="logo">RENNEX</div>
+            <div class="nav-links">
+                <a data-navigate="home">Home</a>
+                <a data-navigate="work">Work</a>
+                <a class="active">About</a>
+                <a data-scroll="contact" class="contact-btn">Contact</a>
+            </div>
+            <div class="hamburger">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="about-hero">
+        <div class="container">
+            <h1>About Me</h1>
+            <p>Get to know more about my journey, skills, and what drives me</p>
+        </div>
+    </section>
+
+    <section class="container about-content">
+        <div class="about-section">
+            <h2>My Story</h2>
+            <p>I'm a System Administrator and Developer with a deep love for coding. My journey in technology started all the way when I was 9, where I was first introduced to Python..</p>
+            <p>What drives me is my passion for helping others. It's an amazing way for me to express myself.</p>
+        </div>
+
+        <div class="about-section">
+            <h2>Skills & Expertise</h2>
+            <p>I've honed my skills in various technologies through a combination of self-directed learning and formal instruction from respected institutions and industry experts.</p>
+            
+            <div class="skills-grid">
+                <div class="skill-category">
+                    <h3>System Administration</h3>
+                    <ul>
+                        <li>Linux/Unix Systems (Self-taught)</li>
+                        <li>Networking (Cisco)</li>
+                        <li>Security (University of Maryland)</li>
+                        <li>Scripting (Self-taught)</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Development</h3>
+                    <ul>
+                        <li>Python (DG Acedemy)</li>
+                        <li>Java (Self-taught)</li>
+                        <li>JavaScript (Master-IT)</li>
+                        <li>C (ETEC1)</li>
+                        <li>C++ (Asia Euro University)</li>
+                        <li>PHP (Master-IT)</li>
+                    </ul>
+                </div>
+                
+                <div class="skill-category">
+                    <h3>Other</h3>
+                    <ul>
+                        <li>Problem Solving</li>
+                        <li>Team Leadership</li>
+                        <li>Operations Management</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="about-section">
+            <h2>Approach & Values</h2>
+            <p>At age 11, I was admitted as a Computer Science undergraduate at Asia Euro University (yes 11, had connections), where I spent a year immersed in advanced coursework. Although I chose to leave to focus on my primary studies, this experience gave me early exposure to university-level concepts and shaped my passion for technology.</p>
+            <p>When I'm not around computer, I tend to play badminton. I have a cheap-ass racket at home :D</p>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">CONTACT</div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fab fa-discord"></i>
+                        <span>zytonal</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <a href="mailto:rennex@rensmp.xyz">rennex@rensmp.xyz</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+</body>
+</html>
