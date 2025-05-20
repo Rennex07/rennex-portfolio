@@ -175,6 +175,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function initWorkPage() {
     const tabButtons = document.querySelectorAll('.tab-btn');
+    if (!tabButtons.length) return; // Exit if not on work page
+    
     const subcategoryButtons = document.querySelectorAll('.subcat-btn');
     const minecraftSubcategories = document.getElementById('minecraft-subcategories');
     const projectCards = document.querySelectorAll('.project-card');
@@ -247,17 +249,19 @@ function initWorkPage() {
         });
     });
 
-    closeModal.addEventListener('click', () => {
-        modal.classList.remove('active');
-        document.body.style.overflow = 'auto';
-    });
-
-    window.addEventListener('click', (e) => {
-        if (e.target === modal) {
+    if (closeModal && modal) {
+        closeModal.addEventListener('click', () => {
             modal.classList.remove('active');
             document.body.style.overflow = 'auto';
-        }
-    });
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    }
 
     if (tabButtons.length > 0) {
         tabButtons[0].click();
@@ -272,7 +276,22 @@ document.querySelectorAll('[data-navigate]').forEach(link => {
     link.addEventListener('click', function(e) {
         e.preventDefault();
         const target = this.getAttribute('data-navigate');
+        const currentPage = window.location.pathname.split('/').pop() || 'index.html';
         
+        // If we're already on the target page, just close the mobile menu if open
+        if ((target === 'home' && currentPage === 'index.html') || 
+            (target === 'work' && currentPage === 'work.html') ||
+            (target === 'about' && currentPage === 'about.html')) {
+            
+            if (navLinks.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+            return;
+        }
+        
+        // Otherwise, navigate to the page
         if (target === 'home') {
             window.location.href = 'index.html';
         } else if (target === 'work') {
@@ -282,50 +301,33 @@ document.querySelectorAll('[data-navigate]').forEach(link => {
         } else if (target === 'contact') {
             window.location.href = 'index.html#contact';
         }
-        
-        if (navLinks.classList.contains('active')) {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }
     });
 });
 
 document.querySelectorAll('[data-scroll]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
         e.preventDefault();
-        
         const targetId = this.getAttribute('data-scroll');
-        let targetElement;
-        
-        if (targetId === 'contact') {
-            window.scrollTo({
-                top: document.body.scrollHeight,
-                behavior: 'smooth'
-            });
-        } else {
-            targetElement = document.getElementById(targetId);
-            if (targetElement) {
-                const headerOffset = 80; 
+        const targetElement = document.getElementById(targetId);
+        if (targetElement) {
+            // Scroll on this page
+            if (targetId === 'contact') {
+                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            } else {
+                const headerOffset = 80;
                 const elementPosition = targetElement.getBoundingClientRect().top;
                 const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-
-                window.scrollTo({
-                    top: offsetPosition,
-                    behavior: 'smooth'
-                });
+                window.scrollTo({ top: offsetPosition, behavior: 'smooth' });
             }
-        }
-        
-        document.querySelectorAll('.nav-links a').forEach(link => {
-            link.classList.remove('active');
-        });
-        this.classList.add('active');
-        
-        if (navLinks.classList.contains('active')) {
-            hamburger.classList.remove('active');
-            navLinks.classList.remove('active');
-            document.body.style.overflow = 'auto';
+            // Close mobile menu if open
+            if (navLinks.classList.contains('active')) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        } else {
+            // Navigate to index and scroll there
+            window.location.href = `index.html#${targetId}`;
         }
     });
 });
@@ -360,6 +362,26 @@ window.addEventListener('scroll', () => {
         }
     }
 });
+function handleHashNavigation() {
+    const hash = window.location.hash.substring(1);
+    if (!hash) return;
+    
+    const targetElement = document.getElementById(hash);
+    if (targetElement) {
+        setTimeout(() => {
+            const headerOffset = 80;
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+            
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }, 100);
+    }
+}
+
+// Handle hash navigation on page load
 window.addEventListener('load', () => {
     const hero = document.querySelector('.hero');
     if (hero) {
@@ -370,4 +392,10 @@ window.addEventListener('load', () => {
             hero.style.opacity = '1';
         }, 500);
     }
+    
+    // Handle hash navigation after page loads
+    handleHashNavigation();
 });
+
+// Also handle hash changes
+window.addEventListener('hashchange', handleHashNavigation);
